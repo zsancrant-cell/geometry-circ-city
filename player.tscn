@@ -81,8 +81,9 @@ script = ExtResource("1_onrkg")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="PlayerBody"]
 position = Vector2(-25, -7)
 amount = 32
-lifetime = 2.5
-gravity = Vector2(-100, 0)
+lifetime = 5.0
+speed_scale = 2.0
+gravity = Vector2(0, 0)
 angle_min = -720.0
 angle_max = 720.0
 scale_amount_min = 5.0

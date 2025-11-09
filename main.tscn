@@ -947,21 +947,16 @@ position = Vector2(175, -48)
 position = Vector2(-17, 0)
 rotation = 1.5707964
 
-[node name="Camera" type="Camera2D" parent="Player/PlayerBody" index="2"]
-position = Vector2(-31, -50)
+[node name="Camera2D" type="Camera2D" parent="Player/PlayerBody" index="4"]
 offset = Vector2(24, 24)
 limit_left = -23
 limit_top = -571
 limit_right = 1429
 limit_bottom = 197
-limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
-rotation_smoothing_speed = 20.0
-drag_left_margin = 0.05
-drag_top_margin = 0.05
-drag_right_margin = 0.05
-drag_bottom_margin = 0.05
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="TileMapLayerTop" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -1100,8 +1095,8 @@ frame = 12
 
 [node name="key" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(192, 22.5)
 texture = ExtResource("8_5vw27")
+offset = Vector2(30, 22.5)
 
 [node name="town" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var movement_particles: CPUParticles2D = $CPUParticles2D
 @onready var headlights: PointLight2D = $PointLight2D
+@onready var movement_sound: AudioStreamPlayer = $Tone
+@onready var headlight_sound: AudioStreamPlayer = $Headlights
 
 var angular_velocity: float = 0.0
 var headlights_on: bool = true
@@ -15,9 +17,12 @@ var headlights_on: bool = true
 func _ready() -> void:
 	if headlights:
 		headlights.enabled = headlights_on
+	# You no longer need to set looping in code,
+	# as it's handled by the file's import settings.
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("headlights"):
+		headlight_sound.play()
 		headlights_on = not headlights_on
 		if headlights:
 			headlights.enabled = headlights_on
@@ -33,8 +38,12 @@ func _physics_process(delta: float) -> void:
 	
 	if input_direction != Vector2.ZERO:
 		velocity = velocity.lerp(target_velocity, acceleration * delta)
+		if movement_sound and not movement_sound.playing:
+			movement_sound.play()
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction * delta)
+		if movement_sound and movement_sound.playing:
+			movement_sound.stop()
 	
 	if movement_particles:
 		movement_particles.emitting = (input_direction != Vector2.ZERO)

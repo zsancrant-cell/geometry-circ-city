@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcxdjc77j2axo"]
+
+[ext_resource type="Script" uid="uid://c43fk1pq32jyo" path="res://player_body.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://cfugh25d5nboh" path="res://sBluePickup.png" id="2_i3pqv"]
+
+[sub_resource type="Curve" id="Curve_onrkg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.284, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_i3pqv"]
+offsets = PackedFloat32Array(0, 0.11111111)
+colors = PackedColorArray(1.232057, 1.232057, 1.2320569, 1, 0.5370113, 0.5370113, 0.5370113, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bvp3"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 180, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 120, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_272bh"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 60, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bvp3")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lquwl")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mycd")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_272bh")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sweqy"]
+size = Vector2(36, 16)
+
+[sub_resource type="Gradient" id="Gradient_onrkg"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i3pqv"]
+gradient = SubResource("Gradient_onrkg")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[node name="Player" type="Node2D"]
+
+[node name="PlayerBody" type="CharacterBody2D" parent="."]
+script = ExtResource("1_onrkg")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="PlayerBody"]
+position = Vector2(-25, -7)
+amount = 32
+lifetime = 2.5
+gravity = Vector2(-100, 0)
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_onrkg")
+color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+color_ramp = SubResource("Gradient_i3pqv")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="PlayerBody"]
+texture_filter = 1
+position = Vector2(-1.9999981, 1.9073486e-06)
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_hqtel")
+animation = &"down"
+
+[node name="CollisionShapeUD" type="CollisionShape2D" parent="PlayerBody"]
+position = Vector2(-0.99999905, 0)
+shape = SubResource("RectangleShape2D_sweqy")
+
+[node name="PointLight2D" type="PointLight2D" parent="PlayerBody"]
+position = Vector2(49, 0)
+scale = Vector2(1, 0.25)
+color = Color(2.2097101, 1.1006103, 0, 1)
+texture = SubResource("GradientTexture2D_i3pqv")

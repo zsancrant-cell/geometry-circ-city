@@ -948,11 +948,10 @@ position = Vector2(-17, 0)
 rotation = 1.5707964
 
 [node name="Camera2D" type="Camera2D" parent="Player/PlayerBody" index="4"]
-offset = Vector2(24, 24)
-limit_left = -23
-limit_top = -571
-limit_right = 1429
-limit_bottom = 197
+limit_left = 1
+limit_top = -547
+limit_right = 1453
+limit_bottom = 222
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 drag_horizontal_enabled = true
